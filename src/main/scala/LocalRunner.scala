@@ -27,11 +27,28 @@ object LocalRunner {
     source
       .createOrReplaceTempView("source")
 
-    val sqlQuery = Source.fromFile("src/main/resources/transform.sql").mkString
+    val result3 = spark.sql(Source.fromFile("src/main/resources/transform3.sql").mkString)
+    result3.show(false)
 
-    val result = spark.sql(sqlQuery)
+    result3
+      .createOrReplaceTempView("input")
 
-    result.show(false)
+    val result4a = result3.sqlContext
+      .sql(Source.fromFile("src/main/resources/transform4a.sql").mkString)
+    result4a.show(false)
+
+    val result4b = result3.sqlContext
+      .sql(Source.fromFile("src/main/resources/transform4b.sql").mkString)
+    result4b.show(false)
+
+
+    val result4c = result3.sqlContext
+      .sql(Source.fromFile("src/main/resources/transform4c.sql").mkString)
+    result4c.show(false)
+
+    val result4d = result3.sqlContext
+      .sql(Source.fromFile("src/main/resources/transform4d.sql").mkString)
+    result4d.show(false)
 
     spark.stop()
   }

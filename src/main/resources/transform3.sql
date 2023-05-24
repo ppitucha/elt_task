@@ -1,5 +1,6 @@
 select
     msisdn,
+    subscr_id,
     email_address,
     case
         when age < 18 then '<18'
@@ -8,6 +9,7 @@ select
         when age >= 36 and age <= 45 then '36-45'
         when age > 45 then '45'
     end as age_band,
+    age,
     case
         when gender = 'male' then 'M'
         when gender = 'female' then 'F'
@@ -16,6 +18,7 @@ select
     date_format(join_date, 'd') as j_day,
     date_format(join_date, 'M') as j_month,
     date_format(join_date, 'y') as j_year,
+    join_date,
     postal_sector,
     handset_model,
     handset_manufacturer,
